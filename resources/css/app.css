@@ -1,0 +1,75 @@
+@import "bootstrap/dist/css/bootstrap.min.css"; 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+        font-family: 'Roboto';
+        src: url('../../public/Fonts/Roboto/Roboto-Black.ttf');
+}
+
+@font-face {
+        font-family: 'Raleway';
+        src: url('../../public/Fonts/Raleway/Raleway-VariableFont_wght.ttf');
+}
+
+@font-face {
+        font-family: 'Wittgenstein';
+        src: url('../../public/Fonts/Wittgenstein/Wittgenstein-VariableFont_wght.ttf');
+}
+
+@font-face {
+        font-family: 'Akaya';
+        src: url('../../public/Fonts/Akaya_Telivigala/AkayaTelivigala-Regular.ttf');
+}
+
+@layer base {
+        body {
+                @apply tw-font-wittgenstein;
+        }
+
+        svg {
+                @apply tw-cursor-pointer dark:tw-fill-white;
+        }
+
+        header section div div svg{
+                @apply tw-w-[15px] sm:tw-w-[30px] tw-h-[15px] sm:tw-h-[30px] dark:tw-fill-white;
+        }
+
+        input, select, textarea {
+                @apply tw-font-raleway; 
+        }
+
+        button{
+                @apply tw-font-roboto; 
+        }
+
+        footer section:not(:nth-child(1)), content section > div{
+                @apply tw-w-[85%] xl:tw-w-[1350px] tw-mx-auto; 
+        }
+
+        footer section:nth-child(2) > *{
+                @apply tw-h-[170px]
+        }
+
+        footer section:nth-child(2) > div:not(:nth-child(1)) {
+                @apply tw-flex tw-flex-col tw-justify-between 
+        }
+
+        footer section:nth-child(2) div:not(:nth-child(1)) h4{
+                @apply tw-font-raleway tw-font-bold tw-text-[18px] xl:tw-text-[20px]; 
+        }
+
+        footer section:nth-child(2) div:not(:nth-child(1)) ul{
+                @apply tw-flex tw-flex-col tw-gap-1; 
+        }
+
+        footer section:nth-child(2) div:not(:nth-child(1)) ul li{
+                @apply tw-text-gray_text tw-border-b tw-border-transparent hover:tw-border-b-gray_text hover:tw-rounded-[4px] tw-w-fit tw-transition tw-ease-in-out tw-duration-1000; 
+        }
+
+        footer section div div svg{
+                @apply tw-fill-black dark:tw-fill-white tw-w-[30px] tw-h-[30px] tw-border tw-rounded-default  tw-p-[6px] hover:tw-bg-black dark:hover:tw-bg-white hover:tw-fill-white dark:hover:tw-fill-dark_blue tw-transition tw-ease-in-out tw-duration-1000;
+        }
+}
+
