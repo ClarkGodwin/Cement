@@ -7,9 +7,9 @@
 <section class="tw-bg-gray dark:tw-bg-blue ">
 	<div class="tw-flex tw-justify-between tw-flex-col md:tw-flex-row tw-pl-0 sm:tw-pl-6 md:tw-pl-0">
 		<div class="tw-flex tw-flex-col tw-gap-[20px] tw-my-[50px]">
-			<h1 class="tw-font-raleway tw-text-black dark:tw-text-white tw-font-black tw-text-[30px] sm:tw-text-[45px] lg:tw-text-[52px] tw-w-[60%] sm:tw-w-[54%] md:tw-w-[80%]">Bienvenue sur Shop.co</h1>
+			<h1 class="tw-font-raleway tw-text-black dark:tw-text-white tw-font-black tw-text-[30px] sm:tw-text-[45px] lg:tw-text-[52px] tw-w-[60%] sm:tw-w-[56%] md:tw-w-[78%]">Bienvenue sur Shop.co</h1>
 	
-			<p class="tw-text-dark_gray tw-w-[90%] sm:tw-w-[89%] md:tw-w-[90%] lg:tw-w-[80%] xl:tw-w-[600px] tw-text-[13px] sm:tw-text-[18px] md:tw-text-[13px] xl:tw-text-[16px]">Chez SHOP.CO, nous comprenons l'importace de la qualite et de la fiabilite dans vos projets de construction. Que vous soyez un professionnel du batiment ou bricoleur passionne, nous sommes la pour vous fournir le meilleur ciment a des prix competitifs.</p>
+			<p class="tw-text-dark_gray tw-w-[90%] sm:tw-w-[89%] md:tw-w-[90%] lg:tw-w-[80%] xl:tw-w-[600px] tw-text-[13px] sm:tw-text-[15px] md:tw-text-[13px] xl:tw-text-[16px]">Chez SHOP.CO, nous comprenons l'importace de la qualite et de la fiabilite dans vos projets de construction. Que vous soyez un professionnel du batiment ou bricoleur passionne, nous sommes la pour vous fournir le meilleur ciment a des prix competitifs.</p>
 	
 			<button  class="tw-bg-black tw-text-white tw-py-[12px] tw-rounded-triple tw-w-[60%] sm:tw-w-[55%] md:tw-w-[60%] lg:tw-w-[55%] xl:tw-w-[300px] tw-text-[13px] sm:tw-text-[16px] md:tw-text-[13px] lg:tw-text-[16px] tw-font-roboto tw-font-black">Acheter maintenant</button>
 		</div>

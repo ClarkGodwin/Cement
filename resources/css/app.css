@@ -33,7 +33,7 @@
         }
 
         header section div div svg{
-                @apply tw-w-[15px] sm:tw-w-[30px] tw-h-[15px] sm:tw-h-[30px] dark:tw-fill-white;
+                @apply tw-w-[15px] sm:tw-w-[16px] md:tw-w-[20px] lg:tw-w-[30px] tw-h-[15px] sm:tw-h-[16px] md:tw-h-[20px] lg:tw-h-[30px] dark:tw-fill-white;
         }
 
         input, select, textarea {
