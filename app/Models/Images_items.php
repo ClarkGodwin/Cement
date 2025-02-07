@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Images_items extends Model
 {
@@ -15,4 +16,8 @@ class Images_items extends Model
         'id_item',
         'path'
     ]; 
+
+    public function items():BelongsTo{
+        return $this->belongsTo(Items::class, 'id_item'); 
+    }
 }
