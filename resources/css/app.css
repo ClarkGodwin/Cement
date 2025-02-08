@@ -44,6 +44,18 @@
                 @apply tw-font-roboto; 
         }
 
+        content section > div input, content section > div select, content section > div textarea{
+                @apply tw-bg-gray dark:tw-bg-blue dark:tw-text-white tw-outline-none tw-px-5 tw-py-5 tw-rounded-double md:tw-rounded-triple tw-font-wittgenstein; 
+        }
+
+        textarea{
+                @apply tw-h-[120px]
+        }
+
+        content section > div label{
+                @apply tw-font-raleway tw-font-bold tw-text-[15px] sm:tw-text-[18px] tw-mt-6;
+        }
+
         footer section:not(:nth-child(1)), content section > div{
                 @apply tw-w-[85%] xl:tw-w-[1350px] tw-mx-auto; 
         }

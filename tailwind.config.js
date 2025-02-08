@@ -26,6 +26,8 @@ export default {
                 'gray_text': '#a9a9a9', 
                 'dark_blue': '#111827',
                 'blue': '#1f2937',
+                'green': '#04ff00', 
+                'red': '#ff0202'
             },
             borderRadius: {
                 'default': "8px",

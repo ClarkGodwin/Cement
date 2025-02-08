@@ -19,6 +19,10 @@ Route::get('/details', function(){
     return view('pages.details');
 })->name('details');
 
+Route::get('/sell', function(){
+    return view('pages.sell'); 
+})->name('sell'); 
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
