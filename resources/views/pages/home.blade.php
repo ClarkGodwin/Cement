@@ -5,7 +5,6 @@
 @section('content')
 
 <section class="tw-bg-gray dark:tw-bg-blue ">
-	@include('layouts.notification')
 	<div class="tw-flex tw-justify-between tw-flex-col md:tw-flex-row tw-pl-0 sm:tw-pl-6 md:tw-pl-0">
 
 		<div class="tw-flex tw-flex-col tw-gap-[20px] tw-my-[50px]">

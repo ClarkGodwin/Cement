@@ -50,6 +50,7 @@
 	</header>
 	
 	<content>
+		@include('layouts.notification')
 		@yield('content')
 	</content>
 	

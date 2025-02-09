@@ -18,7 +18,11 @@ class Register extends Controller
     }
 
     public function store(Request $request){
-        $this->validator($request->all())->validate(); 
+        $validator = $this->validator($request->all()); 
+
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 
         $user = $this->create($request->all()); 
 
@@ -28,7 +32,7 @@ class Register extends Controller
 
         Auth::login($user); 
 
-        return redirect()->intended('')->with('success', 'Inscription reussi');
+        return redirect()->intended('email/verify')->with('success', 'Inscription reussi');
 
     }
 
