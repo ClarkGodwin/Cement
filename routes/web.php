@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Register;
+use App\Http\Controllers\Login; 
 use Illuminate\Support\Facades\Route;
 
 Route::get('/welcome', function () {
@@ -19,18 +21,20 @@ Route::get('/details', function(){
     return view('pages.details');
 })->name('details');
 
+Route::get('/login', function(){
+    return view('pages.login'); 
+})->name('login'); 
+
+Route::post('/login', [Login::class, 'login']); 
+
+Route::post('/logout', [Login::class, 'logout'])->name('logout'); 
+
+Route::get('/register', function(){
+    return view('pages.register'); 
+})->name('register'); 
+
+Route::post('/register', [Register::class, 'store']);
+
 Route::get('/sell', function(){
     return view('pages.sell'); 
 })->name('sell'); 
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
-require __DIR__.'/auth.php';

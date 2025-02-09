@@ -33,12 +33,9 @@
 				</form>
 
 				<div class=" tw-flex tw-gap-1 tw-items-center tw-text-[14px] lg:tw-text-[17px] xl:tw-text-[19px] tw-font-black tw-font-akaya">
-					<a href="{{ route('register')}}" class=" tw-underline hover:tw-no-underline">S'inscrire</a>
+					<a href="{{route('register')}}" class=" tw-underline hover:tw-no-underline">S'inscrire</a>
 					<span>|</span>
-					<a href="{{ route('login')}}" class=" tw-underline hover:tw-no-underline">Se connecter</a>
-					<form action="{{route('logout')}}" method="post">
-						<button type="submit">logout</button>
-					</form>
+					<a href="{{route('login')}}" class=" tw-underline hover:tw-no-underline">Se connecter</a>
 				</div>
 
 				<div class="tw-flex tw-gap-1 sm:tw-gap-3">
