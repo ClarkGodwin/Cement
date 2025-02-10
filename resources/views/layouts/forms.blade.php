@@ -18,7 +18,7 @@
         @endif
         <h1 class=" tw-text-center tw-font-raleway tw-font-black tw-text-[20px] sm:tw-text-[25px]">@yield('form_title')</h1>
 
-        <form action="@yield('action')" class=" tw-flex tw-flex-col tw-w-[100%] md:tw-w-[90%] tw-mx-auto" method="POST" >
+        <form action="@yield('action')" class=" tw-flex tw-flex-col tw-w-[100%] md:tw-w-[90%] tw-mx-auto" method="POST" enctype="multipart/form-data">
             @csrf
 
             @yield('inputs')
