@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Register;
 use App\Http\Controllers\Login; 
@@ -10,7 +11,7 @@ Route::get('/welcome', function () {
     return view('welcome');
 });
 
-Auth::routes(['verify' => true]); 
+Auth::routes(['verify' => false]); 
 
 Route::get('/', function () {
     return view('pages.home');
@@ -46,13 +47,17 @@ Route::get('email/verify', function(){
     return view('pages.auth.verify_email');
 })->middleware('auth')->name('verification.notice');
 
-Route::get('email/verify/{id}/{hash}', function(EmailVerificationRequest $request){
-    $request->fulfill();
-    return redirect(''); 
-})->middleware(['auth', 'signed'])->name('verification.verify'); 
+// Route::get('email/verify/{id}/{hash}', function(EmailVerificationRequest $request){
+//     $request->fulfill();
+//     return redirect(''); 
+// })->middleware(['auth', 'signed'])->name('verification.verify'); 
 
-Route::post('email/verification_notification', function(Request $request){
-    $request->user()->sendEmailVerificationNotofication();
-    return back()->with('success', 'Email de validation envoye'); 
-})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+// Route::post('email/verification_notification', function(Request $request){
+//     $request->user()->sendEmailVerificationNotofication();
+//     return back()->with('success', 'Email de validation envoye'); 
+// })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
+Route::get('email/verify/{id}/{hash}', [VerificationController::class, 'verify'])->middleware(['auth', 'signed'])->name('verification.verify'); 
+
+Route::post('/email/resend', [VerificationController::class, 'resend'])->middleware(['auth', 'throttle:6,1'])->name('verification.resend'); 
 
