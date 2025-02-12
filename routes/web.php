@@ -4,8 +4,10 @@ use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Register;
 use App\Http\Controllers\Login; 
+use App\Http\Controllers\Tables\Items;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
+use function Dom\import_simplexml;
 
 Route::get('/welcome', function () {
     return view('welcome');
@@ -47,17 +49,17 @@ Route::get('email/verify', function(){
     return view('pages.auth.verify_email');
 })->middleware('auth')->name('verification.notice');
 
-// Route::get('email/verify/{id}/{hash}', function(EmailVerificationRequest $request){
-//     $request->fulfill();
-//     return redirect(''); 
-// })->middleware(['auth', 'signed'])->name('verification.verify'); 
-
-// Route::post('email/verification_notification', function(Request $request){
-//     $request->user()->sendEmailVerificationNotofication();
-//     return back()->with('success', 'Email de validation envoye'); 
-// })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
-
 Route::get('email/verify/{id}/{hash}', [VerificationController::class, 'verify'])->middleware(['auth', 'signed'])->name('verification.verify'); 
 
 Route::post('/email/resend', [VerificationController::class, 'resend'])->middleware(['auth', 'throttle:6,1'])->name('verification.resend'); 
+
+Route::post('/sell', [Items::class, 'store'])->name('sell');
+
+Route::get('/dashboard', function(){
+    return view('layouts.admin'); 
+}); 
+
+Route::post('/test-ajax', function(){
+    return response()->json(['success' => 'success']); 
+});
 

@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<title>@yield('title')</title>
 	
 	<script>
@@ -62,7 +63,7 @@
 		<section id="newsletter" class="tw-bg-black tw-text-white tw-absolute tw-top-[-110px] md:tw-top-[-85px] tw-h-[220px] md:tw-h-[170px] tw-rounded-double tw-py-[20px] md:tw-py-[35px] tw-px-[6%] sm:tw-px-[10%] md:tw-px-10 xl:tw-px-20 tw-flex tw-flex-col md:tw-flex-row tw-justify-between">
 			<p class="tw-text-[18px]  md:tw-text-[27px] lg:tw-text-[30px] xl:tw-text-[35px] tw-w-[70%] lg:tw-w-full md:tw-w-[50%] tw-font-roboto">Rester à jour avec toutes les nouveautés que nous proposons</p>
 
-			<form action="" class="tw-flex tw-flex-col tw-gap-3 md:tw-justify-between md:tw-w-[35%] lg:tw-w-[55%] tw-text-[15px] sm:tw-text-[17px]">
+			<form id="test-ajax" action="/test_ajax" class="tw-flex tw-flex-col tw-gap-3 md:tw-justify-between md:tw-w-[35%] lg:tw-w-[55%] tw-text-[15px] sm:tw-text-[17px]">
 				<input type="text" name="newsletter" placeholder="Entrer votre e-mail" class="tw-px-5 tw-py-[6px] tw-rounded-double tw-text-black tw-outline-none">
 				<button type="submit" class="tw-bg-white tw-text-black tw-py-[6px] tw-rounded-double">Abonnement au newsletter</button>
 			</form>

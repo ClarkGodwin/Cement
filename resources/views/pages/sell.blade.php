@@ -2,7 +2,9 @@
 
 @section('form_title', 'Vendez du ciment')
 
-@section('action', 'test')
+@section('action', '/sell')
+
+@section('form_id', 'sell-form')
 
 @section('inputs')
 <input type="hidden" name="id_user" value="{{ auth()->user()->id }}">
@@ -26,6 +28,10 @@
 <input type="number" name="unity_price" id="unity_price" required>
 
 <label for="images[]">Inserer une ou plusieurs images</label>
-<input type="file" name="images[]" id="" accept="image/*" multiple>
+<input type="file" name="images[]" id="images" accept="image/*" multiple>
+
+<input type="file" name="croppedImages[]" id="croppedImagesInput" hidden multiple>
+
+<div id="image-preview-container" class=" tw-mt-5"></div>
 
 @endsection

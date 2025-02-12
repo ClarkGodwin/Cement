@@ -1,5 +1,10 @@
 import 'bootstrap'; 
-import $ from 'jquery';
+import $, { event } from 'jquery';
+import Cropper from 'cropperjs';
+import 'cropperjs/dist/cropper.css';
+
+window.$ = $;
+window.jQuery = $;
 
 function newsletter_change(){
         //Calcule des proprietes que vous voyez dans la reference dans header.blade.php et les applique a l'id newsletter
@@ -15,30 +20,138 @@ function newsletter_change(){
 $(window).on('load', newsletter_change);
 
 $(function(){
-        if(localStorage.getItem('theme') == 'dark'){
-                $('html').addClass('tw-dark');
-        }
+	if(localStorage.getItem('theme') == 'dark'){
+			$('html').addClass('tw-dark');
+	}
+	
+	$('#dark_mode').on('click', function(){
+			$('html').toggleClass('tw-dark');
+			if($('html').hasClass('tw-dark')){
+					localStorage.setItem('theme', 'dark');
+			}else{
+					localStorage.setItem('theme', 'light');
+			}
+	});
+	
+	$('#light_mode').on('click', function(){
+			$('html').toggleClass('tw-dark');
+			if($('html').hasClass('tw-dark')){
+					localStorage.setItem('theme', 'dark');
+			}else{
+					localStorage.setItem('theme', 'light');
+			}
+	});
+	
+	$(window).on('resize', newsletter_change);
+	
+	/* Test de rognage d'images */
+	
+	
+	let cropperInstances = [];
+	
+	$('#images').on('change', function (event) {
+		$('#image-preview-container').empty(); 
+		cropperInstances = [];
+	
+		const files = event.target.files;
+	
+		$.each(files, function(index, file) {
+			const reader = new FileReader();
+	
+			reader.onload = function(event) {
+				const $previewWrapper = document.createElement('div'); 
+				$previewWrapper.className = ' tw-w-full md:tw-w-[600px]'; 
+	
+				let img = document.createElement('img');
+				img.src = event.target.result;
+				img.id = 'image-' + index;
+				img.className = ' tw-w-full md:tw-w-[600px] tw-mb-4';
+				img.style.display = 'block';
+	
+				$previewWrapper.appendChild(img);
+				$('#image-preview-container').append($previewWrapper);
+	
+				let cropper = new Cropper(img, {
+					aspectRatio: 1,
+					viewMode: 1,
+					autoCropArea: 1,
+					background: false,
+					crop: function(event) {
+						let canvas = cropper.getCroppedCanvas();
+						let dataURL = canvas.toDataURL();
+						$('#image-preview').attr('src', dataURL);
+					}
+				});
+	
+			//     cropperInstances.push({
+			//         cropper: cropper,
+			//         file: file.name
+			//     });
+				cropperInstances.push(cropper); 
+			};
+			reader.readAsDataURL(file);
+		}); 
+	
+	}); 
+	
+	$('#sell-form').on('submit', function(event) {
+		event.preventDefault();
 
-        $('#dark_mode').on('click', function(){
-                $('html').toggleClass('tw-dark');
-                if($('html').hasClass('tw-dark')){
-                        localStorage.setItem('theme', 'dark');
-                }else{
-                        localStorage.setItem('theme', 'light');
-                }
-        });
+		const dataTransfer = new DataTransfer(); 
+		let prossedCount = 0;
 
-        $('#light_mode').on('click', function(){
-                $('html').toggleClass('tw-dark');
-                if($('html').hasClass('tw-dark')){
-                        localStorage.setItem('theme', 'dark');
-                }else{
-                        localStorage.setItem('theme', 'light');
-                }
-        });
+		cropperInstances.forEach((cropper, index) => {
+			cropper.getCroppedCanvas().toBlob(function(blob){
+				const file = new File([blob], 'cropped_image_'+index+'.jpeg', {type: 'image/jpeg', lastModified: Date.now()});
+				dataTransfer.items.add(file);
+				prossedCount++;
 
-        $(window).on('resize', newsletter_change);
-
+				if(prossedCount == cropperInstances.length){
+					document.getElementById('croppedImagesInput').files = dataTransfer.files;
+					document.getElementById('sell-form').submit();
+				}
+			}, 'image/jpeg'); 
+		}); 
+	
+		// let formData = new FormData(this); 
+		// formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
+	
+		// let processedImages = 0;
+		
+		// // $.each(cropperInstances, function(index, cropper){
+		// cropperInstances.forEach(function(instance, index){
+		// 	instance.getCroppedCanvas().toBlob(function(blob) {
+		// 		formData.append('cropped_images_'+index, blob, 'cropped_image_'+index+'.jpeg');
+	
+		// 		processedImages++;
+		// 		if(processedImages === cropperInstances.length) {
+		// 			// $('#sell-form').trigger('submit'); 
+		// 			$.ajax({
+		// 				url: '/sell',
+		// 				method: 'POST',
+		// 				headers:{
+		// 					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'), 
+		// 					'Content-Type': 'multipart/form-data',
+		// 					'X-Requested-With': 'XMLHttpRequest', 
+		// 					'Accept': 'application/json'
+		// 				},
+		// 				data: formData,
+		// 				processData: false,
+		// 				contentType: false,
+		// 				success: function(response) {
+		// 					console.log(response);
+		// 				},
+		// 				error: function(xhr, status, error) {
+		// 					console.error(xhr.responseText);
+		// 				}
+		// 			});
+		// 		}
+		// 	// }, 'image/jpeg', 0.8);
+		// 	});
+		// });
+	
+	});
+	
 }); 
 
-
+// import './image-cropper'; 

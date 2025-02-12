@@ -1,4 +1,5 @@
 @import "bootstrap/dist/css/bootstrap.min.css"; 
+@import "cropperjs/dist/cropper.css"; 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

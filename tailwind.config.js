@@ -27,7 +27,9 @@ export default {
                 'dark_blue': '#111827',
                 'blue': '#1f2937',
                 'green': '#04ff00', 
-                'red': '#ff0202'
+                'red': '#ff0202',
+                'black_blue': '#030c1b',
+                'purple_blue': '#16193a',
             },
             borderRadius: {
                 'default': "8px",
