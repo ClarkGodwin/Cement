@@ -1,6 +1,8 @@
 @extends('layouts.forms')
 
-@section('form_title', 'Connectez-vous')
+@section('title', 'Formulaire')
+
+@section('section_h1', 'Connectez-vous')
 
 @section('action', "/login")
 

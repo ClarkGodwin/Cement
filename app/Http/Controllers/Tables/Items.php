@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Tables;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Items as Items_table; 
 use App\Models\Images_items;
@@ -14,7 +15,7 @@ class Items extends Controller
     public function store(Request $request){
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
-            'standard' => 'string|max:255',
+            'standard' => 'nullable|string|max:255',
             'description' => 'required|string',
             'weight' => 'required|numeric',
             'quantity' => 'required|numeric',
@@ -31,10 +32,10 @@ class Items extends Controller
             'name' => $request->name,
             'standard' => $request->standard,
             'description' => $request->description,
-            'weight' => $request->weight,
-            'quantity' => $request->quantity,
-            'unity_price' => $request->unity_price,
-            'id_user' => auth()->user()->id
+            'weight' => (int)$request->weight,
+            'quantity' => (int)$request->quantity,
+            'unity_price' => (int)$request->unity_price,
+            'id_user' => (int)$request->id_user 
         ]);
 
         $last_id = $items->id;
@@ -57,6 +58,13 @@ class Items extends Controller
             }
 
         }
+
+        $user = User::find($request->id_user); 
+
+        if($user->seller != 1){
+            $user->seller = 1; 
+        }
+
         return redirect()->intended('')->with('success', 'Insertion reussi');
     }
 }

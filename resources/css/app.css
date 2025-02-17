@@ -84,5 +84,13 @@
         footer section div div svg{
                 @apply tw-fill-black dark:tw-fill-white tw-w-[30px] tw-h-[30px] tw-border tw-rounded-default  tw-p-[6px] hover:tw-bg-black dark:hover:tw-bg-white hover:tw-fill-white dark:hover:tw-fill-dark_blue tw-transition tw-ease-in-out tw-duration-1000;
         }
+
+        #profile-info div{
+                @apply tw-w-full; 
+        }
+
+        #profile-info div span{
+                @apply tw-font-raleway tw-font-bold tw-text-[16px] md:tw-text-[20px]; 
+        }
 }
 

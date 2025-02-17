@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Register;
 use App\Http\Controllers\Login; 
 use App\Http\Controllers\Tables\Items;
+use App\Http\Controllers\Tables\User;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
 use function Dom\import_simplexml;
@@ -59,7 +60,9 @@ Route::get('/dashboard', function(){
     return view('layouts.admin'); 
 }); 
 
-Route::post('/test-ajax', function(){
-    return response()->json(['success' => 'success']); 
-});
+Route::get('/profile', [User::class, 'show'])->name('profile');
+
+Route::get('/profile-edit/{id}', [User::class, 'edit'])->name('profile-edit'); 
+
+Route::post('/profile-update', [User::class, 'update'])->name('profile-update');
 
