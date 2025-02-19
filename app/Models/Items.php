@@ -16,6 +16,9 @@ class Items extends Model
     protected $fillable = [
         'id_user',
         'id_cement',
+        'name',
+        'standard', 
+        'description',
         'weight',
         'quantity',
         'unity_price'

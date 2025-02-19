@@ -34,7 +34,7 @@ Route::get('/login', function(){
 
 Route::post('/login', [Login::class, 'login']); 
 
-Route::post('/logout', [Login::class, 'logout'])->name('logout'); 
+Route::get('/logout', [Login::class, 'logout'])->name('logout'); 
 
 Route::get('/register', function(){
     return view('pages.auth.register'); 
@@ -56,6 +56,10 @@ Route::post('/email/resend', [VerificationController::class, 'resend'])->middlew
 
 Route::post('/sell', [Items::class, 'store'])->name('sell');
 
+Route::get('/items-list/{id_user}', [Items::class, 'list'])->name('items-list');
+
+Route::get('/items-details/{id}', [Items::class, 'details'])->name('items-details');
+
 Route::get('/dashboard', function(){
     return view('layouts.admin'); 
 }); 
@@ -65,4 +69,12 @@ Route::get('/profile', [User::class, 'show'])->name('profile');
 Route::get('/profile-edit/{id}', [User::class, 'edit'])->name('profile-edit'); 
 
 Route::post('/profile-update', [User::class, 'update'])->name('profile-update');
+
+Route::get('/image-delete/{id_image}', [Items::class, 'image_delete'])->name('image-delete'); 
+
+Route::post('/image-add', [Items::class, 'image_add'])->name('image-add'); 
+
+Route::post('/item-update', [Items::class, 'update'])->name('item-update'); 
+
+Route::post('/item-delete', [Items::class, 'delete'])->name('item-delete');
 

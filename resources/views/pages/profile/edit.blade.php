@@ -16,7 +16,7 @@
 <input type="text" name="last_name" value="{{$user->last_name}}" id="" required>
 
 <label for="first_name">Prenom</label>
-<input type="text" name="last_name" value="{{$user->first_name}}" id="" required>
+<input type="text" name="first_name" value="{{$user->first_name}}" id="" required>
 
 <label for="email">Email</label>
 <input type="email" name="email" value="{{$user->email}}" id="" required>

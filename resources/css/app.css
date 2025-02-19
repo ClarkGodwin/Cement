@@ -33,7 +33,7 @@
                 @apply tw-cursor-pointer dark:tw-fill-white;
         }
 
-        header section div div svg{
+        header section div div svg, header section div div img{
                 @apply tw-w-[15px] sm:tw-w-[16px] md:tw-w-[20px] lg:tw-w-[30px] tw-h-[15px] sm:tw-h-[16px] md:tw-h-[20px] lg:tw-h-[30px] dark:tw-fill-white;
         }
 
@@ -85,11 +85,11 @@
                 @apply tw-fill-black dark:tw-fill-white tw-w-[30px] tw-h-[30px] tw-border tw-rounded-default  tw-p-[6px] hover:tw-bg-black dark:hover:tw-bg-white hover:tw-fill-white dark:hover:tw-fill-dark_blue tw-transition tw-ease-in-out tw-duration-1000;
         }
 
-        #profile-info div{
+        .info div{
                 @apply tw-w-full; 
         }
 
-        #profile-info div span{
+        .info div span{
                 @apply tw-font-raleway tw-font-bold tw-text-[16px] md:tw-text-[20px]; 
         }
 }

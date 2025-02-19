@@ -1,7 +1,12 @@
-import Cropper from "cropperjs";
+import 'bootstrap'; 
+import $, { event } from 'jquery';
+import Cropper from 'cropperjs';
+import 'cropperjs/dist/cropper.css';
+
+window.$ = window.jQuery = $;
 
 $(function () {
-	let cropperInstances = [];
+	var cropperInstances = [];
 	
 	$('#images').on('change', function (event) {
 		$('#image-preview-container').empty(); 
@@ -30,17 +35,7 @@ $(function () {
 					viewMode: 1,
 					autoCropArea: 1,
 					background: false,
-					crop: function(event) {
-						let canvas = cropper.getCroppedCanvas();
-						let dataURL = canvas.toDataURL();
-						$('#image-preview').attr('src', dataURL);
-					}
 				});
-	
-			//     cropperInstances.push({
-			//         cropper: cropper,
-			//         file: file.name
-			//     });
 				cropperInstances.push(cropper); 
 			};
 			reader.readAsDataURL(file);
@@ -67,43 +62,7 @@ $(function () {
 			}, 'image/jpeg'); 
 		}); 
 	
-		// let formData = new FormData(this); 
-		// formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
-	
-		// let processedImages = 0;
-		
-		// // $.each(cropperInstances, function(index, cropper){
-		// cropperInstances.forEach(function(instance, index){
-		// 	instance.getCroppedCanvas().toBlob(function(blob) {
-		// 		formData.append('cropped_images_'+index, blob, 'cropped_image_'+index+'.jpeg');
-	
-		// 		processedImages++;
-		// 		if(processedImages === cropperInstances.length) {
-		// 			// $('#sell-form').trigger('submit'); 
-		// 			$.ajax({
-		// 				url: '/sell',
-		// 				method: 'POST',
-		// 				headers:{
-		// 					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'), 
-		// 					'Content-Type': 'multipart/form-data',
-		// 					'X-Requested-With': 'XMLHttpRequest', 
-		// 					'Accept': 'application/json'
-		// 				},
-		// 				data: formData,
-		// 				processData: false,
-		// 				contentType: false,
-		// 				success: function(response) {
-		// 					console.log(response);
-		// 				},
-		// 				error: function(xhr, status, error) {
-		// 					console.error(xhr.responseText);
-		// 				}
-		// 			});
-		// 		}
-		// 	// }, 'image/jpeg', 0.8);
-		// 	});
-		// });
 	
 	});
 
-});
+}); 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Tables;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User as User_table;
+use Storage;
 use Validator; 
 
 class User extends Controller
@@ -24,14 +25,14 @@ class User extends Controller
 
         if($request->email != $user->email){
             $validator = Validator::make($request->all(), [
-                "last_name" => 'required|string|max:3',
+                "last_name" => 'required|string|max:30',
                 'first_name' => 'required|string|max:40',
                 'email' => 'required|email|unique:users,email',
                 'cropped_profile' => 'nullable|file|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
             ]);
         }else{
             $validator = Validator::make($request->all(), [
-                "last_name" => 'required|string|max:3',
+                "last_name" => 'required|string|max:30',
                 'first_name' => 'required|string|max:40',
                 'cropped_profile' => 'nullable|file|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
             ]);
@@ -53,7 +54,17 @@ class User extends Controller
             $user->email = $request->email; 
         }
 
-        if($request->hasFile('cropped_profile')){}
+        if($request->hasFile('cropped_profile')){
+            if($user->profile_photo != null){
+                Storage::disk('public')->delete($user->profile_photo); 
+            }
+            $path = $request->file('cropped_profile')->store('profile/'. $user->last_name. '_'. $user->id, 'public');
+            $user->profile_photo = $path; 
+        }
+
+        $user->save();
+
+        return redirect()->route('profile')->with('success', 'Modifications reussies'); 
 
     }
 }
