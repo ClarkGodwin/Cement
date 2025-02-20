@@ -25,6 +25,22 @@ class Items extends Controller
         return view('pages.items.details', compact(['item', 'images'])); 
     }
 
+    public function user_view_details($id){
+        $id = base64_decode($id); 
+        $item = Items_table::find($id); 
+        $images = Images_items::where('id_item', $id)->get();
+        return view('pages.details', compact(['item', 'images'])); 
+    }
+
+    public function sold(Request $request){
+        $id = (int)$request->id; 
+        $quantity = (int)$request->quantity;
+        $item = Items_table::find($id); 
+        $item->quantity -= $quantity; 
+        $item->save(); 
+        return redirect()->route('details', base64_encode($id))->with('success', 'Vente effectuee avec succes');
+    }
+
     public function store(Request $request){
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',

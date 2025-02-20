@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\VerificationController;
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Register;
 use App\Http\Controllers\Login; 
@@ -16,17 +17,13 @@ Route::get('/welcome', function () {
 
 Auth::routes(['verify' => false]); 
 
-Route::get('/', function () {
-    return view('pages.home');
-})->name('home');
+Route::get('/', [Controller::class, 'home'])->name('home');
 
 Route::get('/all', function(){
     return view('pages.all');
 })->name('all'); 
 
-Route::get('/details', function(){
-    return view('pages.details');
-})->name('details');
+Route::get('/details/{id}', [Items::class, 'user_view_details'])->name('details');
 
 Route::get('/login', function(){
     return view('pages.auth.login'); 
@@ -77,4 +74,6 @@ Route::post('/image-add', [Items::class, 'image_add'])->name('image-add');
 Route::post('/item-update', [Items::class, 'update'])->name('item-update'); 
 
 Route::post('/item-delete', [Items::class, 'delete'])->name('item-delete');
+
+Route::post('/sold', [Items::class, 'sold'])->name('sold');
 

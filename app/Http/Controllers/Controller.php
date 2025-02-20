@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Images_items;
+use App\Models\Items;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -10,4 +12,10 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests; 
+
+    public function home(){
+        $items = Items::where('quantity', '>', 0)->get(); 
+        $images_items = Images_items::all(); 
+        return view('pages.home', compact(['items', 'images_items'])); 
+    }
 }
