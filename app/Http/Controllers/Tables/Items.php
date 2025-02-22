@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Tables;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order_items;
+use App\Models\Orders;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Items as Items_table; 
@@ -175,6 +177,23 @@ class Items extends Controller
         foreach($images as $image){
             Storage::disk('public')->delete($image->path); 
             $image->delete(); 
+        }
+
+        $order_items = Order_items::where('id_item', $id)->get();
+
+        if(count($order_items) > 0){
+            foreach($order_items as $order_item){
+                $order_id = $order_item->id_order; 
+                $order_item->delete();
+
+                $others_orders = Order_items::where('id_order', $order_id)->get();
+                // to see if there are others items_other so we won't delete the order if so
+
+                if(count($others_orders) == 0){
+                    Orders::find($order_id)->delete(); 
+                }
+                
+            }
         }
 
         $items->delete();

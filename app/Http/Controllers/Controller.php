@@ -14,8 +14,14 @@ class Controller
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests; 
 
     public function home(){
-        $items = Items::where('quantity', '>', 0)->get(); 
+        $items = Items::where('quantity', '>', 0)->latest('created_at')->take(12)->get(); 
         $images_items = Images_items::all(); 
         return view('pages.home', compact(['items', 'images_items'])); 
+    }
+
+    public function all(){
+        $items = Items::where('quantity', '>', 0)->get(); 
+        $images_items = Images_items::all(); 
+        return view('pages.all', compact(['items', 'images_items'])); 
     }
 }
