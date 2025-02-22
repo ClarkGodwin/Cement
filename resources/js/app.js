@@ -5,6 +5,7 @@ import 'cropperjs/dist/cropper.css';
 import './items_images_cropper';
 import './profile_photo'; 
 import './item_add';
+import './chatbot'; 
 
 window.$ = window.jQuery = $;
 

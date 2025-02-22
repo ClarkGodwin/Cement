@@ -28,7 +28,7 @@
 	</div>
 </section>
 
-<section class="tw-bg-black">
+<section class="tw-bg-black tw-z-0">
 	<div class=" tw-flex tw-items-center tw-justify-center ">
 		<ul class=" tw-text-white tw-w-auto tw-font-akaya tw-font-black tw-text-[20px] sm:tw-text-[30px]  md:tw-text-[40px] lg:tw-text-[45px] tw-flex tw-items-center tw-gap-[10px] sm:tw-gap-[20px] md:tw-gap-[30px] lg:tw-gap-[40px] tw-py-[20px] ">
 

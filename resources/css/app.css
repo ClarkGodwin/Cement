@@ -39,6 +39,7 @@
 
         input, select, textarea {
                 @apply tw-font-raleway; 
+                @apply tw-bg-gray dark:tw-bg-blue dark:tw-text-white tw-outline-none tw-p-2 md:tw-p-5 tw-rounded-double md:tw-rounded-triple tw-font-wittgenstein; 
         }
 
         button{
@@ -91,6 +92,18 @@
 
         .info div span{
                 @apply tw-font-raleway tw-font-bold tw-text-[16px] md:tw-text-[20px]; 
+        }
+
+        .chatbot_messages > div{
+                @apply tw-mb-10; 
+        }
+
+        .chatbot_messages > div span{
+                @apply  tw-font-raleway tw-font-bold tw-text-[20px]; 
+        }
+
+        .chatbot_messages > div div{
+                @apply tw-bg-gray dark:tw-bg-blue dark:tw-text-white tw-outline-none tw-p-2 md:tw-p-5 tw-rounded-double md:tw-rounded-triple tw-font-wittgenstein; 
         }
 }
 
