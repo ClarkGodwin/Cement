@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Carts;
 use App\Models\User;
+use Cookie;
 use Hash;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
@@ -41,9 +43,18 @@ class Register extends Controller
             'password' => Hash::make($request->input('password')),
         ]);
 
-        // auth()->login($user); 
+        $session_id = Cookie::get('laravel_session'); 
+        $cart = Carts::where('session_id', $session_id)->first(); 
 
         Auth::login($user); 
+        
+        event(new Registered($user)); 
+
+        if($cart){
+            $cart->id_user = Auth::id();
+            $cart->session_id = null;
+            $cart->save(); 
+        }
 
         return redirect()->intended('email/verify')->with('success', 'Inscription reussi');
 

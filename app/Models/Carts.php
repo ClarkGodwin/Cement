@@ -24,4 +24,8 @@ class Carts extends Model
     public function carts_items(){
         return $this->hasMany(Carts_items::class, 'id_cart'); 
     }
+
+    public function orders(){
+        return $this->hasOne(Orders::class, 'id_cart'); 
+    }
 }

@@ -92,9 +92,33 @@
 				Details
 			</a>
 
-			<a href="#" class=" tw-flex tw-justify-center tw-font-roboto tw-bg-black tw-text-white tw-py-[8px] tw-rounded-triple tw-mt-[20px] tw-font-black tw-w-[85%]">
+			<button class=" tw-flex tw-justify-center tw-font-roboto tw-bg-black tw-text-white tw-py-[8px] tw-rounded-triple tw-mt-[20px] tw-font-black tw-w-[85%]" data-bs-toggle="modal" data-bs-target="#cart_modal_{{$item->id}}">
 				Ajouter au panier
-			</a>
+			</button>
+
+            <div class="modal fade" id="cart_modal_{{$item->id}}" data-bs-keyboard="false" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-scrollable">
+                <div class="modal-content dark:tw-bg-dark_blue tw-rounded-double">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5 tw-font-bold tw-font-raleway">Ajouter au panier pour preparer une commande</h1>
+                    <button type="button" class="btn-close dark:tw-bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <form action="{{ route('carts_add') }}" method="post" class=" tw-flex tw-flex-col tw-w-[100%] md:tw-w-[90%] tw-mx-auto">
+                      @csrf
+
+                      <input type="hidden" name="id" value="{{$item->id}}">
+
+                      <label for="quantity">Nombre de sacs parmi ceux disponible</label>
+                      <input type="number" name="quantity" id="quantity" class=" tw-w-full tw-p-3" min="1" max="{{$item->quantity}}" required>
+      
+                      <button type="submit" class="tw-bg-black dark:tw-bg-white dark:tw-text-black tw-mt-10 tw-text-white tw-py-[12px] tw-rounded-triple tw-w-[60%] sm:tw-w-[50%] md:tw-w-[50%] lg:tw-w-[45%] xl:tw-w-[300px] tw-text-[16px] md:tw-text-[13px] lg:tw-text-[16px] tw-font-roboto tw-font-black">Soumettre</button>
+                      
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
 
 		</div>
 			

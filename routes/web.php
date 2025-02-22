@@ -5,7 +5,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Register;
 use App\Http\Controllers\Login; 
+use App\Http\Controllers\Tables\Carts;
 use App\Http\Controllers\Tables\Items;
+use App\Http\Controllers\Tables\Orders;
 use App\Http\Controllers\Tables\User;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
@@ -15,7 +17,7 @@ Route::get('/welcome', function () {
     return view('welcome');
 });
 
-Auth::routes(['verify' => false]); 
+Auth::routes(['verify' => true]); 
 
 Route::get('/', [Controller::class, 'home'])->name('home');
 
@@ -58,8 +60,8 @@ Route::get('/items-list/{id_user}', [Items::class, 'list'])->name('items-list');
 Route::get('/items-details/{id}', [Items::class, 'details'])->name('items-details');
 
 Route::get('/dashboard', function(){
-    return view('layouts.admin'); 
-}); 
+    return view('pages.admin.dashboard'); 
+})->name('dashboard'); 
 
 Route::get('/profile', [User::class, 'show'])->name('profile');
 
@@ -76,4 +78,12 @@ Route::post('/item-update', [Items::class, 'update'])->name('item-update');
 Route::post('/item-delete', [Items::class, 'delete'])->name('item-delete');
 
 Route::post('/sold', [Items::class, 'sold'])->name('sold');
+
+Route::post('/carts_add', [Carts::class, 'add'])->name('carts_add');
+
+Route::get('/cart_item-delete/{id}', [Carts::class, 'cart_item_delete'])->name('cart_item-delete');
+
+Route::get('/order/{id_idem}', [Orders::class, 'add'])->name('order'); 
+
+Route::get('/delete-account/{id}', [User::class, 'delete'])->name('delete-account'); 
 

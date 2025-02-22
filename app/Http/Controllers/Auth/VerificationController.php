@@ -68,7 +68,7 @@ class VerificationController extends Controller
         }
         // $request->fulfill();
 
-        return redirect('')->with('success', 'Email de validation envoye'); 
+        return redirect('')->with('success', 'Email de validation verifie'); 
     }
 
     public function resend(Request $request){

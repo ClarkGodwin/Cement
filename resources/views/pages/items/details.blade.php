@@ -28,9 +28,12 @@
     <div>
         <span> Images:</span>
         @foreach ($images as $image )
+        @php
+          $encoded_image_id = base64_encode($image->id); 
+        @endphp
         <div class=" tw-flex tw-flex-col md:tw-flex-row tw-items-baseline md:tw-items-end tw-gap-y-2 md:tw-gap-x-2 tw-mb-6">
             <img src="{{ asset("storage/$image->path") }}" alt="" class=" tw-rounded-default tw-mt-3 tw-w-[80%] sm:tw-w-[450px]">
-            <a href="{{ route('image-delete', $image->id) }}" class=""><button class=" tw-bg-red tw-text-white tw-text-[11px] sm:tw-text-[13px] tw-p-[2px] md:tw-p-1 tw-rounded-triple">supprimer</button></a>
+            <a href="{{ route('image-delete', $encoded_image_id) }}" class=""><button class=" tw-bg-red tw-text-white tw-text-[11px] sm:tw-text-[13px] tw-p-[2px] md:tw-p-1 tw-rounded-triple">supprimer</button></a>
 
         </div>
 

@@ -111,6 +111,7 @@ class Items extends Controller
     }
 
     public function image_delete($id){ // il s'agit de l'id de l'image
+        $id = base64_decode($id); 
         $image = Images_items::find($id); 
         $item = Items_table::find($image->id_item); 
         $path = $image->path; 

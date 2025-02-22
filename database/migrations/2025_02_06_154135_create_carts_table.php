@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('carts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_user')->references('id')->on('users');
-            $table->string('session_id')->nullable(false);
+            $table->foreignId('id_user')->references('id')->on('users')->nullable(true);
+            $table->string('session_id')->nullable(true);
             $table->timestamps();
         });
     }

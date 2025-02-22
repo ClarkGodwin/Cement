@@ -13,7 +13,8 @@ class Orders extends Model
     protected $table = 'orders';
 
     protected $fillable = [
-        'id_user'
+        'id_user', 
+        'id_cart'
     ]; 
 
     public function user():BelongsTo{
@@ -22,5 +23,9 @@ class Orders extends Model
 
     public function order_items(){
         return $this->hasMany(Order_items::class, 'id_order'); 
+    }
+
+    public function carts():BelongsTo{
+        return $this->belongsTo(Carts::class, 'id_cart'); 
     }
 }
