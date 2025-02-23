@@ -70,9 +70,11 @@ Route::group(['middleware' => ['auth']], function(){
         
         Route::get('/items-details/{id}', [Items::class, 'details'])->name('items-details');
         
-        Route::get('/dashboard', function(){
-            return view('pages.admin.dashboard'); 
-        })->name('dashboard'); 
+        Route::get('/dashboard', [Controller::class, 'dashboard'])->name('dashboard'); 
+        
+        Route::get('/admin_user', function(){
+            return view('pages.admin.user'); 
+        })->name('admin_user'); 
         
         Route::get('/image-delete/{id_image}', [Items::class, 'image_delete'])->name('image-delete'); 
         

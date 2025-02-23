@@ -6,6 +6,7 @@ import './items_images_cropper';
 import './profile_photo'; 
 import './item_add';
 import './chatbot'; 
+import './admin'; 
 
 window.$ = window.jQuery = $;
 

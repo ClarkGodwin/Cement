@@ -63,7 +63,7 @@
         </div>
     
         @if (auth()->user()->admin)
-        <a href="{{ route('dashboard')}}" class=" tw-max-w-0 tw-max-h-0"><button class="tw-bg-green tw-mt-10 tw-text-white tw-py-[12px] tw-rounded-triple tw-text-[16px] md:tw-text-[13px] lg:tw-text-[16px] tw-font-roboto tw-font-black tw-w-[75%] sm:tw-w-[50%] lg:tw-w-[25%] xl:tw-w-[300px] " >Voir les posts</button></a>
+        <a href="{{ route('dashboard')}}" id="dashboard" class=" dashboard tw-max-w-0 tw-max-h-0"><button class="tw-bg-green tw-mt-10 tw-text-white tw-py-[12px] tw-rounded-triple tw-text-[16px] md:tw-text-[13px] lg:tw-text-[16px] tw-font-roboto tw-font-black tw-w-[75%] sm:tw-w-[50%] lg:tw-w-[25%] xl:tw-w-[300px]">Dashboard</button></a>
         @endif
 
     </div>

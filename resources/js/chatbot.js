@@ -7,20 +7,31 @@ $(function(){
     $('#chatbot-form').on('submit', function (event) {
         event.preventDefault(); 
         
-        var div = $('<div></div>'),
-            message = $('#message').val(); 
+        var div = $('<div>'),
+            message = $('#message').val(), 
+            name = $('#name').val(); 
 
-        div.append('<span>Bot :</span>');
+        div.append('<span>'+name+' :</span>');
         div.append('<div>' + message + '</div>'); 
 
         chatbot_messages.append(div); 
 
         $.ajax({
-            url: '{{ route("send_message")}}',
+            url: '/send_message',
             method: 'POST',
-            data: { message: message},
-            headers: { 'X-SCRF-TOKEN': $(' meta[name="csrf-token] ').attr('content')}, 
+            data: JSON.stringify('message', message),
+            contentType: 'application/json', 
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}, 
             success: function(response){
+                response = response.response; 
+                div = $('<div>');
+                div.append('<span>Bot :</span>');
+                div.append('<div>'+response+'</div>'); 
+
+                chatbot_messages.append(div); 
+            },
+            error: function(error){
+                console.log('Error: ', error); 
             }
         }); 
     }); 

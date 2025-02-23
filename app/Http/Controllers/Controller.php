@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User; 
 use App\Models\Images_items;
 use App\Models\Items;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -23,5 +24,10 @@ class Controller
         $items = Items::where('quantity', '>', 0)->get(); 
         $images_items = Images_items::all(); 
         return view('pages.all', compact(['items', 'images_items'])); 
+    }
+
+    public function dashboard(){
+        $username = ucfirst(auth()->user()->last_name) . '_' . ucfirst(substr(auth()->user()->first_name, 0, 1));
+        return view('pages.admin.dashboard', compact('username')); 
     }
 }
