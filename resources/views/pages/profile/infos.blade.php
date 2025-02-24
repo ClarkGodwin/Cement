@@ -22,8 +22,12 @@
     @if (auth()->user()->profile_photo)
     <div>
         <span>Photo de profile : </span>
-        <img src="{{ asset('storage/'. auth()->user()->profile_photo)}}" alt="" class=" tw-rounded-default tw-mt-3 tw-w-full sm:tw-w-[500px]">
-    </div>
+        <div class=" tw-flex tw-items-end tw-gap-x-2">
+          <img src="{{ asset('storage/'. auth()->user()->profile_photo)}}" alt="" class=" tw-rounded-default tw-mt-3 tw-w-full sm:tw-w-[500px]">
+          <a href="{{ route('profile-photo-delete')}}"><button class=" tw-bg-red tw-text-white tw-font-black tw-text-[13px] tw-p-1 tw-rounded-triple">Supprimer</button></a>
+
+        </div>
+    </img>
         
     @endif
 

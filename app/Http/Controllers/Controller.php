@@ -25,9 +25,4 @@ class Controller
         $images_items = Images_items::all(); 
         return view('pages.all', compact(['items', 'images_items'])); 
     }
-
-    public function dashboard(){
-        $username = ucfirst(auth()->user()->last_name) . '_' . ucfirst(substr(auth()->user()->first_name, 0, 1));
-        return view('pages.admin.dashboard', compact('username')); 
-    }
 }

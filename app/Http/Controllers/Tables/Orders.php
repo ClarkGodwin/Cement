@@ -45,4 +45,25 @@ class Orders extends Controller
         return redirect()->route('home')->with('success', 'Commande effectuee avec succes');
 
     }
+
+    public function sold(Request $request){
+        $id = (int)$request->id; 
+        $quantity = (int)$request->quantity;
+
+        $item = Items::find($id); 
+        $item->quantity -= $quantity; 
+        $item->save(); 
+
+        $order = Orders_table::create([
+            'id_user' => auth()->user()->id,
+        ]); 
+        
+        Order_items::create([
+            'id_order' => $order->id,
+            'id_item' => $item->id,
+            'quantity' => $item->quantity
+        ]); 
+
+        return redirect()->route('details', base64_encode($id))->with('success', 'Vente effectuee avec succes');
+    }
 }

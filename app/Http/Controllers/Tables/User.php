@@ -9,6 +9,7 @@ use App\Models\Images_items;
 use App\Models\Order_items;
 use App\Models\Orders;
 use Auth;
+use Hash;
 use Illuminate\Http\Request;
 use App\Models\User as User_table;
 use App\Models\Items; 
@@ -21,12 +22,6 @@ class User extends Controller
         $id = base64_encode(auth()->user()->id);
         return view('pages.profile.infos', compact('id')); 
     }
-
-    // public function dashboard(){
-    //     $users = User_table::all();
-        
-    //     // return view('pages.admin.dashboard', compact())
-    // }
 
     public function edit($id){
         $user = User_table::find(base64_decode($id)); 
@@ -41,12 +36,14 @@ class User extends Controller
                 "last_name" => 'required|string|max:30',
                 'first_name' => 'required|string|max:40',
                 'email' => 'required|email|unique:users,email',
+                'password' => 'nullable|string|min:8|confirmed',
                 'cropped_profile' => 'nullable|file|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
             ]);
         }else{
             $validator = Validator::make($request->all(), [
                 "last_name" => 'required|string|max:30',
                 'first_name' => 'required|string|max:40',
+                'password' => 'nullable|string|min:8|confirmed',
                 'cropped_profile' => 'nullable|file|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
             ]);
         }
@@ -65,6 +62,12 @@ class User extends Controller
 
         if($request->email != $user->email){
             $user->email = $request->email; 
+            $user->email_verified_at = null;
+            $user->sendEmailVerificationNotification();
+        }
+
+        if($request->filled('password')){
+            $user->password = Hash::make($request->password); 
         }
 
         if($request->hasFile('cropped_profile')){
@@ -77,8 +80,20 @@ class User extends Controller
 
         $user->save();
 
-        return redirect()->route('profile')->with('success', 'Modifications reussies'); 
+        return redirect()->route('profile')->with('success', 'Modifications enregistrees, si l\'email a ete modifie, veuillez le valider avec l\'email de validation envoye'); 
 
+    }
+
+    public function profile_photo_delete(){
+        $user = User_table::find(auth()->user()->id); 
+
+        if($user->profile_photo != null){
+            Storage::disk('public')->delete($user->profile_photo); 
+            $user->profile_photo = null; 
+            $user->save(); 
+        }
+
+        return redirect()->route('profile')->with('success', 'Photo de profil supprimee avec succes');
     }
 
     public function delete($id){

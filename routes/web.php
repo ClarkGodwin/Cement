@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AdminUsersController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\ChatbotController;
 use App\Http\Controllers\Controller;
@@ -10,6 +14,7 @@ use App\Http\Controllers\Tables\Carts;
 use App\Http\Controllers\Tables\Items;
 use App\Http\Controllers\Tables\Orders;
 use App\Http\Controllers\Tables\User;
+use App\Models\Order_items;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
 use function Dom\import_simplexml;
@@ -43,6 +48,12 @@ Route::post('/email/resend', [VerificationController::class, 'resend'])->middlew
 
 Route::post('/send_message', [ChatbotController::class, 'send_message'])->name('send_message'); 
 
+Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+
+Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+
+Route::post('/password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
+
 
 
 Route::group(['middleware' => ['auth']], function(){
@@ -50,7 +61,10 @@ Route::group(['middleware' => ['auth']], function(){
 
     Route::group(['middleware' => ['verified']], function(){
         Route::get('/profile-edit/{id}', [User::class, 'edit'])->name('profile-edit'); 
+
         Route::post('/profile-update', [User::class, 'update'])->name('profile-update');
+
+        Route::get('/profile-photo-delete', [User::class, 'profile_photo_delete'])->name('profile-photo-delete');
         
         Route::get('/logout', [Login::class, 'logout'])->name('logout'); 
         
@@ -70,12 +84,16 @@ Route::group(['middleware' => ['auth']], function(){
         
         Route::get('/items-details/{id}', [Items::class, 'details'])->name('items-details');
         
-        Route::get('/dashboard', [Controller::class, 'dashboard'])->name('dashboard'); 
         
-        Route::get('/admin_user', function(){
-            return view('pages.admin.user'); 
-        })->name('admin_user'); 
+        Route::group(['middleware' => ['admin']], function(){
+            Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard'); 
+        }); 
         
+        Route::get('/admin-users-list', [AdminUsersController::class, 'list'])->name('admin-users-list'); 
+
+        Route::get('/user-details/{id}', [AdminUsersController::class, 'details'])->name('user-details');
+        
+
         Route::get('/image-delete/{id_image}', [Items::class, 'image_delete'])->name('image-delete'); 
         
         Route::post('/image-add', [Items::class, 'image_add'])->name('image-add'); 
@@ -84,7 +102,7 @@ Route::group(['middleware' => ['auth']], function(){
         
         Route::post('/item-delete', [Items::class, 'delete'])->name('item-delete');
         
-        Route::post('/sold', [Items::class, 'sold'])->name('sold');
+        Route::post('/sold', [Orders::class, 'sold'])->name('sold');
         
         Route::post('/carts_add', [Carts::class, 'add'])->name('carts_add');
         

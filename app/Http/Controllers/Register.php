@@ -31,7 +31,7 @@ class Register extends Controller
             'last_name' => 'required|string|max:255', 
             'first_name' => 'required|string|max:255', 
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:8|confirmed',
+            'password' => 'required|string|min:8|confirmed',
         ]);
         if($validator->fails()){
             return redirect()->back()->withErrors($validator)->withInput();

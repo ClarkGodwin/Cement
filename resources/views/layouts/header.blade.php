@@ -223,8 +223,8 @@
 		  <div class="modal-body">
 			<form action="{{ route('send_message')}}" method="post" class=" tw-flex tw-flex-col tw-w-[100%] md:tw-w-[90%] tw-mx-auto" id="chatbot-form">
 				@csrf
-				<label for="question">Question</label>
 				<input type="hidden" name="name" id="name" value="{{ $name}}">
+				<label for="question">Question</label>
 				<input type="text" name="message" id="message" class=" tw-w-full tw-p-3" required>
 				<button type="submit" class="tw-bg-purple-400 tw-mt-5 tw-text-white tw-py-[10px] tw-rounded-triple tw-w-[60%] sm:tw-w-[50%] md:tw-w-[50%] lg:tw-w-[45%] xl:tw-w-[300px] tw-text-[16px] md:tw-text-[13px] lg:tw-text-[16px] tw-font-roboto tw-font-black">Envoyer</button>
 			</form>

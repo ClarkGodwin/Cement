@@ -21,6 +21,13 @@
 <label for="email">Email</label>
 <input type="email" name="email" value="{{$user->email}}" id="" required>
 
+<label for="password">Mot de passe (Ne remplissez pas ce champ ni le suivant si vous ne voulez pas le modifier)</label>
+<input type="password" name="password" id="password">
+@error('password')<span class=" tw-text-red tw-mt-1">{{ $message}}</span>@enderror
+
+<label for="confirm_password">Confirmer le mot de passe</label>
+<input type="password" name="password_confirmation" id="password_confirmation" >
+
 <label for="profile_photo">Photo de profile</label>
 <input type="file" name="profile_photo" accept="image/*" id="profile_photo">
 
