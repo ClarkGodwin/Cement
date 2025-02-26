@@ -85,6 +85,7 @@ class Items extends Controller
 
         if($user->seller != 1){
             $user->seller = 1; 
+            $user->save(); 
         }
 
         return redirect()->intended('')->with('success', 'Insertion reussi');

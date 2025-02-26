@@ -42,11 +42,11 @@
         }
         
         .chatbot input{
-                @apply tw-bg-gray dark:tw-bg-blue dark:tw-text-white tw-outline-none tw-p-2 md:tw-p-5 tw-rounded-double md:tw-rounded-triple tw-font-wittgenstein; 
+                @apply tw-bg-gray dark:tw-bg-blue dark:tw-text-white tw-outline-none tw-p-3 tw-rounded-double md:tw-rounded-triple tw-font-wittgenstein; 
         }
 
         button{
-                @apply tw-font-roboto; 
+                @apply tw-font-roboto tw-outline-none; 
         }
 
         content section > div input, content section > div select, content section > div textarea{
@@ -106,7 +106,7 @@
         }
 
         .chatbot_messages > div div{
-                @apply tw-bg-gray dark:tw-bg-blue dark:tw-text-white tw-outline-none tw-p-2 md:tw-p-5 tw-rounded-double md:tw-rounded-triple tw-font-wittgenstein; 
+                @apply tw-bg-gray dark:tw-bg-blue dark:tw-text-white tw-outline-none tw-p-2 md:tw-p-4 tw-rounded-double md:tw-rounded-triple tw-font-wittgenstein; 
         }
 }
 

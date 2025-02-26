@@ -72,6 +72,8 @@
 
             <span class=" tw-font-bold tw-text-[20px] lg:tw-text-[25px]">Prix : {{ $item->unity_price }} BIF</span>
 
+            <span class=" tw-font-bold tw-text-[20px] lg:tw-text-[25px]">Poids par sac : {{ $item->weight }} Kg</span>
+
             <div class=" tw-flex  tw-items-center tw-gap-3">
             @php
               $user = App\Models\User::find($item->id_user);
