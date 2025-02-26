@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Order_items;
 use App\Models\Orders;
 use App\Models\User;
+use Dom\Element;
 use Illuminate\Http\Request;
 use App\Models\Items as Items_table; 
 use App\Models\Images_items;
@@ -91,7 +92,7 @@ class Items extends Controller
         return redirect()->intended('')->with('success', 'Insertion reussi');
     }
 
-    public function image_add(Request $request){
+    public function image_add(Request $request, $admin = false){
         $item_id = (int)$request->id_item; 
         if($request->hasFile('cropped_item')){
             $path = $request->file('cropped_item')->store('items/'. auth()->user()->last_name. '_'. auth()->user()->id. '/'. $request->name. '_'. $item_id , 'public');
@@ -101,20 +102,33 @@ class Items extends Controller
                 'path' => $path
             ]);
         }
-        return redirect()->route('items-details', base64_encode($item_id))->with('success', 'Image ajoutee avec succes');
+        if($admin){
+            return redirect()->route('item-details', base64_encode($item_id))->with('success', 'Image ajoutee avec succes');
+
+        }
+        else{
+            return redirect()->route('items-details', base64_encode($item_id))->with('success', 'Image ajoutee avec succes');
+
+        }
     }
 
-    public function image_delete($id){ // il s'agit de l'id de l'image
+    public function image_delete($id, $admin = false){ // il s'agit de l'id de l'image
         $id = base64_decode($id); 
         $image = Images_items::find($id); 
         $item = Items_table::find($image->id_item); 
         $path = $image->path; 
         Storage::disk('public')->delete($path); 
         $image->delete(); 
-        return redirect()->route('items-details', base64_encode($item->id))->with('success', 'Image supprimee avec succes');
+        if($admin){
+            return redirect()->route('item-details', base64_encode($item->id))->with('success', 'Image supprimee avec succes');
+        }
+        else{
+            return redirect()->route('items-details', base64_encode($item->id))->with('success', 'Image supprimee avec succes');
+
+        }
     }
 
-    public function update(Request $request){
+    public function update(Request $request, $admin = true){
         $id = (int)$request->id; 
         $items = Items_table::find($id);
 
@@ -157,11 +171,18 @@ class Items extends Controller
 
         $items->save(); 
 
-        return redirect()->route('items-details', base64_encode($id))->with('success', 'Modifications enregistrees avec succes');
+        if($admin){
+            return redirect()->route('item-details', base64_encode($id))->with('success', 'Modifications enregistrees avec succes');
+
+        }
+        else{
+            return redirect()->route('items-details', base64_encode($id))->with('success', 'Modifications enregistrees avec succes');
+
+        }
 
     }
 
-    public function delete(Request $request){
+    public function delete(Request $request, $admin = false){
         $id = (int)$request->id; 
         $items = Items_table::find($id); 
         $images = Images_items::where('id_item', $id)->get();
@@ -189,6 +210,13 @@ class Items extends Controller
         }
 
         $items->delete();
-        return redirect()->route('items-list', base64_encode(auth()->user()->id))->with('success', 'Modifications enregistrees avec succes');
+        if($admin){
+            return redirect()->route('admin-items-list')->with('success', 'Modifications enregistrees avec succes');
+
+        }
+        else{
+            return redirect()->route('items-list', base64_encode(auth()->user()->id))->with('success', 'Modifications enregistrees avec succes');
+
+        }
     }
 }

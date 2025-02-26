@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AdminItemsController;
+use App\Http\Controllers\Admin\AdminOrdersController;
 use App\Http\Controllers\Admin\AdminUsersController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
@@ -37,6 +39,11 @@ Route::get('/login', function(){
 
 Route::post('/login', [Login::class, 'login']); 
 
+Route::get('/register', function(){
+    return view('pages.auth.register'); 
+})->name('register'); 
+
+Route::post('/register', [Register::class, 'store']);
 
 Route::get('email/verify', function(){
     return view('pages.auth.verify_email');
@@ -68,11 +75,6 @@ Route::group(['middleware' => ['auth']], function(){
         
         Route::get('/logout', [Login::class, 'logout'])->name('logout'); 
         
-        Route::get('/register', function(){
-            return view('pages.auth.register'); 
-        })->name('register'); 
-        
-        Route::post('/register', [Register::class, 'store']);
         
         Route::get('/sell', function(){
             return view('pages.sell'); 
@@ -85,22 +87,32 @@ Route::group(['middleware' => ['auth']], function(){
         Route::get('/items-details/{id}', [Items::class, 'details'])->name('items-details');
         
         
-        Route::group(['middleware' => ['admin']], function(){
-            Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard'); 
-        }); 
+        Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard'); 
         
         Route::get('/admin-users-list', [AdminUsersController::class, 'list'])->name('admin-users-list'); 
 
         Route::get('/user-details/{id}', [AdminUsersController::class, 'details'])->name('user-details');
+
+        Route::get('/change-status/{id}/{status}', [AdminUsersController::class, 'change_status'])->name('change-status'); 
+
+        Route::get('/admin-items-list', [AdminItemsController::class, 'list'])->name('admin-items-list'); 
+
+        Route::get('/item-details/{id}', [AdminItemsController::class, 'details'])->name('item-details'); 
+
+        Route::get('/admin-orders-list', [AdminOrdersController::class, 'list'])->name('admin-orders-list'); 
+
+        Route::get('/order-details/{id}', [AdminOrdersController::class, 'details'])->name('order-details'); 
+
+        Route::get('/order-delete/{id}', [AdminOrdersController::class, 'delete'])->name('order-delete'); 
         
 
-        Route::get('/image-delete/{id_image}', [Items::class, 'image_delete'])->name('image-delete'); 
+        Route::get('/image-delete/{id_image}/{admin?}', [Items::class, 'image_delete'])->name('image-delete'); 
         
-        Route::post('/image-add', [Items::class, 'image_add'])->name('image-add'); 
+        Route::post('/image-add/{admin?}', [Items::class, 'image_add'])->name('image-add'); 
         
         Route::post('/item-update', [Items::class, 'update'])->name('item-update'); 
         
-        Route::post('/item-delete', [Items::class, 'delete'])->name('item-delete');
+        Route::post('/item-delete{admin?}', [Items::class, 'delete'])->name('item-delete');
         
         Route::post('/sold', [Orders::class, 'sold'])->name('sold');
         
@@ -110,7 +122,7 @@ Route::group(['middleware' => ['auth']], function(){
         
         Route::get('/order/{id_idem}', [Orders::class, 'add'])->name('order'); 
         
-        Route::get('/delete-account/{id}', [User::class, 'delete'])->name('delete-account'); 
+        Route::get('/delete-account/{id}/{admin?}', [User::class, 'delete'])->name('delete-account'); 
     });
 
 }); 

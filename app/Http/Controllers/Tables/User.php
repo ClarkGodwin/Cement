@@ -96,7 +96,8 @@ class User extends Controller
         return redirect()->route('profile')->with('success', 'Photo de profil supprimee avec succes');
     }
 
-    public function delete($id){
+    public function delete($id, $admin = false){
+        $encoded_id = $id; 
         $id = base64_decode($id); 
         $user = User_table::find($id); 
         $items = Items::where('id_user', $id)->get();
@@ -146,11 +147,19 @@ class User extends Controller
             Storage::disk('public')->delete($user->profile_photo); 
         }
 
-        Auth::logout(); 
-
-        $user->delete(); 
-
-        return redirect()->route('home')->with('success', ' Suppression du compte reussi avec succes'); 
+        if($admin){
+            $user->delete(); 
+    
+            return redirect()->route('admin-users-list')->with('success', ' Suppression du compte reussi avec succes'); 
+            
+        }
+        else{
+            Auth::logout(); 
+    
+            $user->delete(); 
+    
+            return redirect()->route('home')->with('success', ' Suppression du compte reussi avec succes'); 
+        }
 
     }
 }

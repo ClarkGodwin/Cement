@@ -5,8 +5,8 @@
 @endif
 
 @if (session("error"))
-<div class=" tw-w-[95%] sm:tw-w-[90%] tw-text-white tw-font-bold tw-font-raleway tw-text-[15px] sm:tw-text-[17px] md:tw-text-[20px] tw-bg-red tw-p-4 tw-rounded-default tw-mt-5">
-    {{session("denied")}}
+<div class=" tw-w-[95%] sm:tw-w-[90%] tw-mx-auto tw-text-white tw-font-bold tw-font-raleway tw-text-[15px] sm:tw-text-[17px] md:tw-text-[20px] tw-bg-red tw-p-4 tw-rounded-default tw-mt-5">
+    {{session("error")}}
 </div>
 @endif
 

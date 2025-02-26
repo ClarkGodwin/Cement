@@ -60,7 +60,7 @@
                 
                 <div id="item-preview-container" class=" tw-my-5 tw-px-4"></div>
 
-                <button type="submit" class="tw-bg-black dark:tw-bg-white dark:tw-text-black tw-mt-10 tw-text-white tw-py-[12px] tw-rounded-triple tw-w-[60%] sm:tw-w-[50%] md:tw-w-[50%] lg:tw-w-[45%] xl:tw-w-[300px] tw-text-[16px] md:tw-text-[13px] lg:tw-text-[16px] tw-font-roboto tw-font-black">Soumettre</button>
+                <button type="submit" class="tw-bg-black dark:tw-bg-white dark:tw-text-black tw-mt-10 tw-text-white tw-py-[12px] tw-rounded-triple tw-w-[60%] sm:tw-w-[50%] md:tw-w-[50%] lg:tw-w-[40%] xl:tw-w-[200px] tw-text-[16px] tw-font-roboto tw-font-black">Soumettre</button>
 
               </form>
             </div>
@@ -89,7 +89,7 @@
   
                   <input type="hidden" name="id" value="{{ $item->id}}">
 
-                  <button type="submit" class="tw-bg-red  tw-mt-10 tw-text-white tw-py-[12px] tw-rounded-triple tw-w-[40%] sm:tw-w-[50%] md:tw-w-[50%] lg:tw-w-[45%] xl:tw-w-[200px] tw-text-[16px] md:tw-text-[13px] lg:tw-text-[16px] tw-font-roboto tw-font-black">Supprimer</button>
+                  <button type="submit" class="tw-bg-red  tw-mt-10 tw-text-white tw-py-[12px] tw-rounded-triple tw-w-[40%] sm:tw-w-[50%] md:tw-w-[50%] lg:tw-w-[40%] xl:tw-w-[200px] tw-text-[16px] tw-font-roboto tw-font-black">Supprimer</button>
                   
                 </form>
               </div>
@@ -108,17 +108,6 @@
                 <button type="button" class="btn-close dark:tw-bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                @if($errors->any())
-                <div class=" alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error )
-                        <li>{{ $error }}</li>
-                            
-                        @endforeach
-                    </ul>
-                </div>
-                @endif
-                
                 <form action="{{ route('item-update') }}" method="post" id="item-form" enctype="multipart/form-data" class=" tw-flex tw-flex-col tw-w-[100%] md:tw-w-[90%] tw-mx-auto">
                   @csrf
   

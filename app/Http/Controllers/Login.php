@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Carts;
 use App\Models\Carts_items;
+use App\Models\User;
 use Cookie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth; 
@@ -63,12 +64,21 @@ class Login extends Controller
 
         $credentials = $request->only('email', 'password'); 
 
-        // if (Auth::attempt($credentials, $request->remember)) {
         if(Auth::attempt($credentials, $request->filled('remember'))){
             $id_user = Auth::id(); 
-            self::update_cart($id_user); 
+            $user = User::find($id_user); 
 
-            return redirect()->intended('')->with('success', 'Connexion reussi');
+            if($user->active){
+                $this->update_cart($id_user); 
+    
+                return redirect()->intended('')->with('success', 'Connexion reussi');
+
+            }
+            else{
+                Auth::logout(); 
+                return redirect()->intended('')->with('error', 'Erreur, impossible de vous connectez, Votre compte n\'est plus actif, veuillez contactez un adminitrateur pour le reactiver');
+
+            }
         }
 
         return back()->withErrors([

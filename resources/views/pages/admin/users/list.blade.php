@@ -2,7 +2,7 @@
 
 @section('title', 'Dashboard') 
 
-@section('content')
+@section('admin_content')
 
 <h1 class=" tw-font-raleway tw-font-black tw-text-center tw-text-[23px] sm:tw-text-[25px] md:tw-text-[30px]">Liste des utilisateurs</h1>
 

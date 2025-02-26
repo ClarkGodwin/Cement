@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-	
+
 	<script>
 		(function(){
 			if(localStorage.getItem('theme') == 'dark'){
@@ -12,7 +12,7 @@
 			}
 		})(); 
 	</script>
-
+	
     <style>
         .scrollbar::-webkit-scrollbar {
             width: 0px;
@@ -21,6 +21,7 @@
 
     <title>@yield('title')</title>
 	@vite(['resources/css/app.css', 'resources/js/app.js'])
+
 </head>
 <body class=" tw-bg-gray dark:tw-bg-black_blue dark">
 
@@ -39,10 +40,10 @@
                     <a href="{{ route('admin-users-list')}}" class="lien">
                         <button class=" tw-border dark:tw-border-white tw-w-[150px] tw-py-[6px] md:tw-py-3 tw-text-[14px] md:tw-text-[17px] tw-rounded-triple tw-font-raleway tw-font-black" >Users</button>
                     </a>
-                    <a href="{{ route('admin-users-list')}}" class="lien">
+                    <a href="{{ route('admin-items-list')}}" class="lien">
                         <button class=" tw-border dark:tw-border-white tw-w-[150px] tw-py-[6px] md:tw-py-3 tw-text-[14px] md:tw-text-[17px] tw-rounded-triple tw-font-raleway tw-font-black" >Items</button>
                     </a>
-                    <a href="{{ route('admin-users-list')}}" class="lien">
+                    <a href="{{ route('admin-orders-list')}}" class="lien">
                         <button class=" tw-border dark:tw-border-white tw-w-[150px] tw-py-[6px] md:tw-py-3 tw-text-[14px] md:tw-text-[17px] tw-rounded-triple tw-font-raleway tw-font-black" >Orders</button>
                     </a>
                 </div>
@@ -55,7 +56,12 @@
             <svg version="1.1" id="light_mode" class="tw-hidden dark:tw-block tw-w-[20px] tw-h-[20px]" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 122.88 122.67" style="enable-background:new 0 0 122.88 122.67" xml:space="preserve"><style type="text/css">.st0{fill-rule:evenodd;clip-rule:evenodd;}</style><g><path class="st0" d="M122.88,62.58l-12.91,8.71l7.94,13.67l-15.03,3.23l2.72,15.92l-15.29-2.25l-2.76,15.58l-14.18-8.11 l-7.94,13.33l-10.32-11.93l-12.23,9.55l-4.97-15.16l-15.54,4.59l1.23-15.54L7.69,92.43l6.75-13.93L0,71.03l11.29-10.95L0.38,48.66 l14.65-6.5L9.42,27.51l15.58-0.76l0-15.8l14.78,5.22l5.99-14.82l11.93,9.98L68.15,0l7.6,13.33l14.18-6.5l2.12,15.07l15.8-1.15 l-3.86,15.46l15.41,4.2l-9.21,12.95L122.88,62.58L122.88,62.58z M104.96,61.1c0-12.14-4.29-22.46-12.87-31 c-8.58-8.54-18.94-12.82-31.04-12.82c-12.1,0-22.42,4.29-30.96,12.82c-8.54,8.53-12.82,18.85-12.82,31 c0,12.1,4.29,22.46,12.82,31.08c8.53,8.62,18.85,12.95,30.96,12.95c12.1,0,22.46-4.33,31.04-12.95 C100.67,83.56,104.96,73.2,104.96,61.1L104.96,61.1L104.96,61.1z"/></g></svg>
 
             <div class=" tw-bg-white dark:tw-bg-purple_blue dark:tw-text-white tw-px-2 sm:tw-px-7 tw-py-6 tw-mt-3 tw-w-full sm:tw-w-[95%] tw-mx-auto tw-h-[90%] tw-rounded-double tw-overflow-y-auto scrollbar">
-                @yield('content')
+                <content>
+                    @include('layouts.notification')
+                    @yield('content')
+                </content>
+                
+                @yield('admin_content')
             </div>
 
         </div>

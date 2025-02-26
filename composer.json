@@ -11,6 +11,7 @@
         "intervention/image": "*",
         "laravel/fortify": "*",
         "laravel/framework": "^11.31",
+        "laravel/scout": "*",
         "laravel/tinker": "^2.9",
         "laravel/ui": "^4.6"
     },
