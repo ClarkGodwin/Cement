@@ -103,6 +103,9 @@ class Items extends Controller
             ]);
         }
         if($admin){
+            if(!auth()->user()->admin){
+                return redirect()->route('home')->with('error', 'Vous devez etre un administarteur pour acceder a cette partie de l\'application'); 
+            }
             return redirect()->route('item-details', base64_encode($item_id))->with('success', 'Image ajoutee avec succes');
 
         }
@@ -120,6 +123,9 @@ class Items extends Controller
         Storage::disk('public')->delete($path); 
         $image->delete(); 
         if($admin){
+            if(!auth()->user()->admin){
+                return redirect()->route('home')->with('error', 'Vous devez etre un administarteur pour acceder a cette partie de l\'application'); 
+            }
             return redirect()->route('item-details', base64_encode($item->id))->with('success', 'Image supprimee avec succes');
         }
         else{
@@ -172,6 +178,9 @@ class Items extends Controller
         $items->save(); 
 
         if($admin){
+            if(!auth()->user()->admin){
+                return redirect()->route('home')->with('error', 'Vous devez etre un administarteur pour acceder a cette partie de l\'application'); 
+            }
             return redirect()->route('item-details', base64_encode($id))->with('success', 'Modifications enregistrees avec succes');
 
         }
@@ -211,6 +220,9 @@ class Items extends Controller
 
         $items->delete();
         if($admin){
+            if(!auth()->user()->admin){
+                return redirect()->route('home')->with('error', 'Vous devez etre un administarteur pour acceder a cette partie de l\'application'); 
+            }
             return redirect()->route('admin-items-list')->with('success', 'Modifications enregistrees avec succes');
 
         }

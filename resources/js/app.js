@@ -7,6 +7,7 @@ import './profile_photo';
 import './item_add';
 import './chatbot'; 
 import './admin'; 
+import './search'; 
 
 window.$ = window.jQuery = $;
 

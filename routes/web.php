@@ -12,6 +12,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Register;
 use App\Http\Controllers\Login; 
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\Tables\Carts;
 use App\Http\Controllers\Tables\Items;
 use App\Http\Controllers\Tables\Orders;
@@ -61,6 +62,7 @@ Route::get('password/reset/{token}', [ResetPasswordController::class, 'showReset
 
 Route::post('/password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
 
+Route::post('/search', [SearchController::class, 'search'])->name('search'); 
 
 
 Route::group(['middleware' => ['auth']], function(){
@@ -72,6 +74,7 @@ Route::group(['middleware' => ['auth']], function(){
         Route::post('/profile-update', [User::class, 'update'])->name('profile-update');
 
         Route::get('/profile-photo-delete', [User::class, 'profile_photo_delete'])->name('profile-photo-delete');
+
         
         Route::get('/logout', [Login::class, 'logout'])->name('logout'); 
         

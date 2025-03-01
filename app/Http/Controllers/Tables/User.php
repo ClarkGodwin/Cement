@@ -148,6 +148,9 @@ class User extends Controller
         }
 
         if($admin){
+            if(!auth()->user()->admin){
+                return redirect()->route('home')->with('error', 'Vous devez etre un administarteur pour acceder a cette partie de l\'application'); 
+            }
             $user->delete(); 
     
             return redirect()->route('admin-users-list')->with('success', ' Suppression du compte reussi avec succes'); 

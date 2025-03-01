@@ -42,7 +42,7 @@ class ForgotPasswordController extends Controller
 
         return $status === Password::RESET_LINK_SENT
                     ? back()->with('success', 'Consulter votre boite mail pour naviguer vers le lien de reinitialisation de mot de passe')
-                    : back()->withErrors(['email' => __($status)]);
+                    : back()->withErrors(['email' => 'Utilisateur non trouvé']);
     }
 
     public function toMail($notifiable){
@@ -53,10 +53,10 @@ class ForgotPasswordController extends Controller
 
         return (new MailMessage)
                     ->subject('Reinitialisation du mot de passe')
-                    ->line(Lang::get('Vous recevez cet email car nous avons recu une demande de reinitialisation de votre mot de passe.'))
-                    ->action(Lang::get('Reinitialisez votre mot de passe'), $url)
-                    ->line(Lang::get('This password reset link will expire in :count minutes.', ['count' => config('auth.passwords.'.config('auth.defaults.passwords').'.expire')]))
-                    ->line(Lang::get("Si vous n'avez pas demande de reinitialisation, aucune action n'est requise."));
+                    ->line('Vous recevez cet email car nous avons recu une demande de reinitialisation de votre mot de passe.')
+                    ->action('Reinitialisez votre mot de passe', $url)
+                    ->line('This password reset link will expire in :count minutes.', ['count' => config('auth.passwords.'.config('auth.defaults.passwords').'.expire')])
+                    ->line("Si vous n'avez pas demande de reinitialisation, aucune action n'est requise.");
     }
         
 }

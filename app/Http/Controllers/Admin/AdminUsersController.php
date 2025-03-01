@@ -17,17 +17,26 @@ use Auth;
 class AdminUsersController extends Controller
 {
     public function list(){
+        if(!auth()->user()->admin){
+            return redirect()->route('home')->with('error', 'Vous devez etre un administarteur pour acceder a cette partie de l\'application'); 
+        }
         $users = User::all();
         return view('pages.admin.users.list', compact('users')); 
     }
 
     public function details($id){
+        if(!auth()->user()->admin){
+            return redirect()->route('home')->with('error', 'Vous devez etre un administarteur pour acceder a cette partie de l\'application'); 
+        }
         $id = base64_decode($id); 
         $user = User::find($id); 
         return view('pages.admin.users.details', compact('user')); 
     }
 
     public function change_status($id, $status){
+        if(!auth()->user()->admin){
+            return redirect()->route('home')->with('error', 'Vous devez etre un administarteur pour acceder a cette partie de l\'application'); 
+        }
         $id = base64_decode($id); 
         $user = User::find($id); 
         $id = base64_encode($id); 

@@ -11,11 +11,17 @@ use Illuminate\Http\Request;
 class AdminItemsController extends Controller
 {
     public function list(){
+        if(!auth()->user()->admin){
+            return redirect()->route('home')->with('error', 'Vous devez etre un administarteur pour acceder a cette partie de l\'application'); 
+        }
         $items = Items::all();
         return view('pages.admin.items.list', compact('items')); 
     }
 
     public function details($id){
+        if(!auth()->user()->admin){
+            return redirect()->route('home')->with('error', 'Vous devez etre un administarteur pour acceder a cette partie de l\'application'); 
+        }
         $id = base64_decode($id); 
         $item = Items::find($id); 
         $user = User::find($item->id_user); 

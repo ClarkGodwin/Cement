@@ -25,4 +25,10 @@ class Controller
         $images_items = Images_items::all(); 
         return view('pages.all', compact(['items', 'images_items'])); 
     }
+
+    public function admin_middleware(){
+        if(!auth()->user()->admin){
+            return redirect()->route('home')->with('error', 'Vous devez etre un administarteur pour acceder a cette partie de l\'application'); 
+        }
+    }
 }

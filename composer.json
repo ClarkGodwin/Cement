@@ -7,13 +7,18 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "algolia/algoliasearch-client-php": "^4.15",
         "botman/botman": "*",
         "intervention/image": "*",
+        "kargnas/laravel-ai-translator": "^1.6",
+        "laravel-lang/lang": "^15.19",
         "laravel/fortify": "*",
         "laravel/framework": "^11.31",
-        "laravel/scout": "*",
+        "laravel/scout": "^10.13",
         "laravel/tinker": "^2.9",
-        "laravel/ui": "^4.6"
+        "laravel/ui": "^4.6",
+        "teamtnt/laravel-scout-tntsearch-driver": "^15.0",
+        "tio/laravel": "^1.23"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

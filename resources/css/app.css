@@ -117,6 +117,10 @@
                 @apply tw-font-bold tw-font-wittgenstein tw-text-[13px] sm:tw-text-[18px]; 
         }
 
+        .search_bar li{
+                @apply  tw-text-[16px] md:tw-text-[18px] tw-border-b tw-p-2 tw-cursor-pointer hover:tw-bg-gray dark:hover:tw-bg-blue tw-transition tw-ease-in-out tw-duration-700; 
+        }
+
         /* .details > div img{
                 @apply tw-w-[250px] tw-mt-3 tw-rounded-default; 
         } */
