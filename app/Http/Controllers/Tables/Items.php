@@ -23,6 +23,7 @@ class Items extends Controller
     
     public function details($id){
         $id = base64_decode($id); 
+        $id = (int)$id;
         $item = Items_table::find($id); 
         $images = Images_items::where('id_item', $id)->get();
         return view('pages.items.details', compact(['item', 'images'])); 

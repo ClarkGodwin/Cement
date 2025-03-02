@@ -46,7 +46,6 @@ class Login extends Controller
             }
             $cart_item->save(); 
 
-            $cart_with_session->delete(); 
         }
 
     }

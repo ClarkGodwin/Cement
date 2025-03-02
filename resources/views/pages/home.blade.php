@@ -4,6 +4,22 @@
 
 @section('content')
 
+<style>
+	@keyframes scroll{
+		0%{
+			transform: translateX(0);
+		}
+		100%{
+			/* transform: translateX(calc(-250px * 7)); */
+			transform: translate(-50%); 
+		}
+	}
+
+	.animation_scroll{
+		animation: scroll 625s linear infinite;
+	}
+</style>
+
 <section class="tw-bg-gray dark:tw-bg-blue ">
 	<div class="tw-flex tw-justify-between tw-flex-col md:tw-flex-row tw-pl-0 sm:tw-pl-6 md:tw-pl-0">
 
@@ -28,13 +44,22 @@
 	</div>
 </section>
 
-<section class="tw-bg-black tw-z-0">
-	<div class=" tw-flex tw-items-center tw-justify-center ">
-		<ul class=" tw-text-white tw-w-auto tw-font-akaya tw-font-black tw-text-[20px] sm:tw-text-[30px]  md:tw-text-[40px] lg:tw-text-[45px] tw-flex tw-items-center tw-gap-[10px] sm:tw-gap-[20px] md:tw-gap-[30px] lg:tw-gap-[40px] tw-py-[20px] ">
+<section class="tw-bg-black tw-z-0 tw-overflow-x-hidden">
+	<div class=" tw-flex tw-items-center tw-justify-center  tw-overflow-x-hidden">
+		<ul id="scroll_list" class=" tw-text-white tw-w-auto tw-font-akaya tw-font-black tw-text-[20px] sm:tw-text-[30px]  md:tw-text-[40px] lg:tw-text-[45px] tw-flex tw-items-center tw-whitespace-nowrap tw-gap-[10px] sm:tw-gap-[20px] md:tw-gap-[30px] lg:tw-gap-[40px] tw-py-[20px] animation_scroll">
 
-			@for ($i = 0; $i < 4; $i++)
-			<li>Dangote</li>
-			@endfor
+			@foreach ($items as $item)
+			@php
+				if($item->standard != 'null' && $item->standard != ''){
+					$name = $item->name . '_'. $item->standard;
+				}
+				else{
+					$name = $item->name;
+				}
+			@endphp
+
+			<li>{{ $name}}</li>
+			@endforeach
 		</ul>
 	</div>
 

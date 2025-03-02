@@ -64,6 +64,10 @@ Route::post('/password/reset', [ResetPasswordController::class, 'reset'])->name(
 
 Route::post('/search', [SearchController::class, 'search'])->name('search'); 
 
+Route::post('/carts_add', [Carts::class, 'add'])->name('carts_add');
+
+Route::get('/cart_item-delete/{id}', [Carts::class, 'cart_item_delete'])->name('cart_item-delete');
+
 
 Route::group(['middleware' => ['auth']], function(){
     Route::get('/profile', [User::class, 'show'])->name('profile');
@@ -118,10 +122,6 @@ Route::group(['middleware' => ['auth']], function(){
         Route::post('/item-delete{admin?}', [Items::class, 'delete'])->name('item-delete');
         
         Route::post('/sold', [Orders::class, 'sold'])->name('sold');
-        
-        Route::post('/carts_add', [Carts::class, 'add'])->name('carts_add');
-        
-        Route::get('/cart_item-delete/{id}', [Carts::class, 'cart_item_delete'])->name('cart_item-delete');
         
         Route::get('/order/{id_idem}', [Orders::class, 'add'])->name('order'); 
         

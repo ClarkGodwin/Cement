@@ -24,13 +24,29 @@ $(function(){
                     li[0].scrollIntoView({behavior: "smooth", block: "center", inline: "center"});
                 }
                 else{
-                    data.forEach(item => {
-                        let li = $('<li></li>'); 
-                        li.append('<a href="/items/' + item.id + '>'+item.name+'</a>'); 
+                    $.each(data, function(index, item){
+                    });
+                    for(let i=0; i < data.length; i++){
+                        var li = $('<li></li>'),
+                            a = $('<a></a>'),
+                            id =  data[i].id,
+                            name = '';  
+                        if(data[i].standard !== null ){
+                            name = data[i].name + ' de standard ' + data[i].standard; 
+                        }
+                        else{
+                            name = data[i].name; 
+                        }
+                        a.append(name); 
+                        a.attr('href',
+                            '/details/'+btoa(id.toString())
+                        ); 
+                        li.append(a); 
                         $('#search_results').append(li); 
                         li[0].scrollIntoView({behavior: "smooth", block: "center", inline: "center"});
                         
-                    });
+                        console.log(data[i].name); 
+                    }
                 }
                     
             },

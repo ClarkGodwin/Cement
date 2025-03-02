@@ -22,6 +22,7 @@ function newsletter_change(){
                 'left': left
         });
 }
+
 $(window).on('load', newsletter_change);
 
 $(function(){
@@ -48,5 +49,13 @@ $(function(){
 	});
 	
 	$(window).on('resize', newsletter_change);
+
+	var $ul = $('#scroll_list'),
+		$lis = $ul.find('li');
+
+	for(let i =0; i < 10; i++){
+		$ul.append($lis.clone())
+	}
+
 }); 
 

@@ -43,7 +43,7 @@
                 $ordername = $order->updated_at. "_".$user->last_name;
             @endphp
             <a href="{{ route('item-details', $id_item)}}" class="ms-2 me-auto tw-text-[13px] md:tw-text-[15px] tw-w-full">
-                <div class="fw-bold tw-text-[16px] sm:tw-text-[18px] tw-w-full tw-text-ellipsis">{{ ucfirst($itemname)}}</div>
+                <div class="fw-bold tw-text-[16px] sm:tw-text-[18px] tw-w-full tw-text-ellipsis">{{ ucfirst($itemname)}} , {{ $order_item->quantity}} sacs dans la commande</div>
             </a>
         </li>
 
