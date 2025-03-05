@@ -135,7 +135,7 @@ class Items extends Controller
         }
     }
 
-    public function update(Request $request, $admin = true){
+    public function update(Request $request, $admin = false){
         $id = (int)$request->id; 
         $items = Items_table::find($id);
 

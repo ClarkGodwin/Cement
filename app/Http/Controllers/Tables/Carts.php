@@ -12,6 +12,9 @@ use App\Models\Carts as Carts_table;
 
 class Carts extends Controller
 {
+    public function test(){
+        return redirect()->route('home')->with('success', 'Element(s) ajoute(s) au panier avec succes'); 
+    }
     public function clean_expired_carts(){
         $expiration_date = Carbon::now()->subDays(7); 
         //calculate the date of the 7 days before
@@ -35,10 +38,10 @@ class Carts extends Controller
         $quantity = (int)$request->quantity;
 
         if(Auth::check()){
-            $cart = Carts_table::where('id_user', Auth::id())->first(); 
+            $cart = Carts_table::where('id_user', auth()->user()->id)->first(); 
 
             if(!$cart){
-                $cart = Carts_table::create(['id_user' => Auth::id()]); 
+                $cart = Carts_table::create(['id_user' => auth()->user()->id]); 
             }
         }
         else{
@@ -72,7 +75,7 @@ class Carts extends Controller
 
         $cart->touch();  //pour mettre a jour la table Carts pour ajout d'un cart_item
 
-        return redirect()->intended('')->with('success', 'Element(s) ajoute(s) au panier avec succes'); 
+        return redirect()->back()->with('success', 'Element(s) ajoute(s) au panier avec succes'); 
     }
 
     public function Cart_item_delete($id){
@@ -91,6 +94,6 @@ class Carts extends Controller
             $cart->delete(); 
         }
 
-        return redirect()->intended('')->with('success', 'L\'element a ete supprime du panier avec succes'); 
+        return redirect()->back()->with('success', 'L\'element a ete supprime du panier avec succes'); 
     }
 }

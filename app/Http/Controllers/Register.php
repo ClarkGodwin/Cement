@@ -20,41 +20,6 @@ class Register extends Controller
         // return view('pages.register'); 
     }
 
-    public function update_cart($id_user){
-        $session_id = Cookie::get('laravel_session'); //pour recupere la session actuelle 
-
-        $cart_with_session = Carts::where('session_id', $session_id)->first(); 
-        //on recupere un eventuel cart cree avec ladite session 
-
-        $cart_with_id = Carts::where('id_user', $id_user)->first(); 
-        //on recupere un eventuel cart de l'utilisateur
-
-        if($cart_with_session){// si la cart existe
-            $carts_items = Carts_items::where('id_cart', $cart_with_session->id)->get(); 
-            //on recupere tous les items y relatifs
-
-            if($cart_with_id){ // si l'utilisateur avait une cart existante
-                foreach($carts_items as $cart_item){
-                    $cart_item->id_cart = $cart_with_id->id; 
-                    //on met a jour leur id_cart correspondant en leur donnant la valeur du cart de l'utilisateur connecte
-                }
-            }
-            else{ // si l'utilisateur n'avait pas de cart a la base
-                $cart_with_id = Carts::create([
-                    'id_user' => $id_user
-                ]); 
-
-                foreach($carts_items as $cart_item){ // pour chaque item dans la cart avec la session
-                    $cart_item->id_cart = $cart_with_id->id; 
-                    //on met a jour leur id_cart correspondant en leur donnant la valeur du cart de l'utilisateur connecte
-                }
-            }
-            $cart_item->save(); 
-
-        }
-
-    }
-
     public function store(Request $request){
         // $validator = $this->validator($request->all()); 
 
@@ -82,7 +47,6 @@ class Register extends Controller
         $session_id = Cookie::get('laravel_session'); 
         $cart = Carts::where('session_id', $session_id)->first(); 
 
-        $this->update_cart($user->id); 
         Auth::login($user); 
         
         event(new Registered($user)); 

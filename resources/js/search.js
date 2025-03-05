@@ -45,7 +45,6 @@ $(function(){
                         $('#search_results').append(li); 
                         li[0].scrollIntoView({behavior: "smooth", block: "center", inline: "center"});
                         
-                        console.log(data[i].name); 
                     }
                 }
                     

@@ -63,7 +63,7 @@ class Login extends Controller
 
         $credentials = $request->only('email', 'password'); 
 
-        if(Auth::attempt($credentials, $request->filled('remember'))){
+        if(Auth::attempt($credentials)){
             $id_user = Auth::id(); 
             $user = User::find($id_user); 
 
@@ -75,7 +75,7 @@ class Login extends Controller
             }
             else{
                 Auth::logout(); 
-                return redirect()->intended('')->with('error', 'Erreur, impossible de vous connectez, Votre compte n\'est plus actif, veuillez contactez un adminitrateur pour le reactiver');
+                return redirect()->route('home')->with('error', 'Erreur, impossible de vous connectez, Votre compte n\'est plus actif, veuillez contactez un adminitrateur pour le reactiver');
 
             }
         }

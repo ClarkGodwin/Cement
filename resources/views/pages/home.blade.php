@@ -16,7 +16,7 @@
 	}
 
 	.animation_scroll{
-		animation: scroll 625s linear infinite;
+		animation: scroll 1000s linear infinite;
 	}
 </style>
 

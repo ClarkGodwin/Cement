@@ -66,6 +66,8 @@ Route::post('/search', [SearchController::class, 'search'])->name('search');
 
 Route::post('/carts_add', [Carts::class, 'add'])->name('carts_add');
 
+Route::post('/test', [Carts::class, 'test'])->name('test'); 
+
 Route::get('/cart_item-delete/{id}', [Carts::class, 'cart_item_delete'])->name('cart_item-delete');
 
 
